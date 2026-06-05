@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuidemos el Agua | Proyecto Final</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+:root{
+--azul:#0F4C81;
+--azulClaro:#00A8E8;
+--azulOscuro:#082D4B;
+--fondo:#EEF7FD;
+--blanco:#FFFFFF;
+--texto:#233142;
+--gris:#666;
+--sombra:0 15px 35px rgba(0,0,0,.12);
+--radio:20px;
+}
+html{
+scroll-behavior:smooth;
+}
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#eef7fd,#dff2ff,#eef7fd);
+background-size:400% 400%;
+animation:fondoGeneral 15s ease infinite;
+color:var(--texto);
+overflow:hidden;
+}
+@keyframes fondoGeneral{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:290px;
+height:100vh;
+background:linear-gradient(180deg,var(--azul),var(--azulOscuro));
+color:white;
+padding:30px;
+overflow-y:auto;
+z-index:999;
+}
+.logo{
+text-align:center;
+margin-bottom:35px;
+}
+.logo h1{
+font-size:30px;
+line-height:1.2;
+letter-spacing:1px;
+}
+.logo p{
+font-size:13px;
+opacity:.8;
+margin-top:10px;
+}
+.menu{
+list-style:none;
+}
+.menu li{
+margin-bottom:10px;
+}
+.menu a{
+display:block;
+padding:12px 15px;
+border-radius:12px;
+color:white;
+text-decoration:none;
+font-size:15px;
+transition:.3s;
+}
+.menu a:hover{
+background:rgba(255,255,255,.15);
+transform:translateX(6px);
+}
+.main{
+margin-left:290px;
+height:100vh;
+position:relative;
+overflow:hidden;
+}
+.page{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+padding:45px;
+overflow-y:auto;
+display:none;
+animation:fade .5s ease;
+}
+.page.active{
+display:block;
+}
+@keyframes fade{
+from{
+opacity:0;
+transform:translateX(40px);
+}
+to{
+opacity:1;
+transform:translateX(0);
+}
+}
+.hero{
+height:calc(100vh - 90px);
+border-radius:30px;
+overflow:hidden;
+position:relative;
+box-shadow:var(--sombra);
+}
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+animation:fondoAgua 20s ease-in-out infinite alternate;
+transform-origin:center;
+}
+@keyframes fondoAgua{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1.03);}
+}
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,.40),rgba(0,0,0,.55));
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+z-index:2;
+}
+.hero-content{
+max-width:900px;
+color:white;
+}
+.hero-content h2{
+font-size:72px;
+margin-bottom:20px;
+}
+.hero-content p{
+font-size:24px;
+line-height:1.8;
+}
+.section-title{
+margin-bottom:35px;
+}
+.section-title h2{
+font-size:45px;
+color:var(--azul);
+margin-bottom:15px;
+}
+.section-title p{
+font-size:18px;
+max-width:900px;
+color:#555;
+}
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:var(--sombra);
+transition:.4s;
+border-top:5px solid var(--azulClaro);
+}
+.card:hover{
+transform:translateY(-10px) scale(1.02);
+}
+.card img{
+width:100%;
+height:240px;
+object-fit:cover;
+border-radius:15px;
+margin-bottom:20px;
+}
+.card h3{
+color:var(--azul);
+margin-bottom:15px;
+font-size:24px;
+}
+.card p{
+line-height:1.9;
+text-align:justify;
+}
+.two-column{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:35px;
+align-items:center;
+}
+.two-column img{
+width:100%;
+height:550px;
+object-fit:cover;
+border-radius:25px;
+box-shadow:var(--sombra);
+}
+.text-box{
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:var(--sombra);
+}
+.text-box h3{
+color:var(--azul);
+margin-bottom:20px;
+font-size:30px;
+}
+.text-box p{
+line-height:2;
+text-align:justify;
+margin-bottom:15px;
+}
+.navigation{
+display:flex;
+justify-content:space-between;
+margin-top:40px;
+}
+.nav-btn{
+background:var(--azul);
+color:white;
+border:none;
+padding:14px 24px;
+border-radius:10px;
+cursor:pointer;
+font-size:15px;
+transition:.3s;
+}
+.nav-btn:hover{
+background:var(--azulClaro);
+}
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-bottom:40px;
+}
+.stat{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:var(--sombra);
+}
+.stat h3{
+font-size:50px;
+color:var(--azulClaro);
+margin-bottom:10px;
+}
+.stat p{
+line-height:1.7;
+}
+.table-container{
+overflow-x:auto;
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:var(--sombra);
+}
+table{
+width:100%;
+border-collapse:collapse;
+}
+table th{
+background:var(--azul);
+color:white;
+padding:15px;
+}
+table td{
+padding:15px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+table tr:hover{
+background:#f5f5f5;
+}
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+.gallery img{
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:20px;
+box-shadow:var(--sombra);
+transition:.4s;
+cursor:pointer;
+}
+.gallery img:hover{
+transform:scale(1.05);
+}
+.quiz{
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:var(--sombra);
+max-width:1000px;
+margin:auto;
+}
+.quiz h3{
+color:var(--azul);
+margin-bottom:20px;
+font-size:30px;
+}
+.quiz p{
+font-size:18px;
+margin-bottom:15px;
+font-weight:500;
+}
+.quiz button{
+background:var(--azul);
+color:white;
+border:none;
+padding:12px 22px;
+margin:5px;
+border-radius:10px;
+cursor:pointer;
+transition:.3s;
+font-size:15px;
+}
+.quiz button:hover{
+background:var(--azulClaro);
+transform:translateY(-3px);
+}
+.quiz button:disabled{
+background:#bdbdbd;
+cursor:not-allowed;
+transform:none;
+}
+#resultadoQuiz{
+text-align:center;
+margin-top:25px;
+font-size:32px;
+color:var(--azul);
+}
+.video-box{
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:var(--sombra);
+}
+.video-container{
+position:relative;
+width:100%;
+padding-bottom:56.25%;
+height:0;
+overflow:hidden;
+border-radius:20px;
+}
+.video-container iframe{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+border:none;
+}
+.map-layout{
+display:grid;
+grid-template-columns:400px 1fr;
+gap:30px;
+}
+.info-card{
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:var(--sombra);
+}
+.info-card h3{
+color:var(--azul);
+font-size:28px;
+margin-bottom:20px;
+}
+.info-card p{
+line-height:1.9;
+margin-bottom:15px;
+}
+.map-frame{
+background:white;
+padding:20px;
+border-radius:25px;
+box-shadow:var(--sombra);
+}
+.map-frame iframe{
+width:100%;
+height:650px;
+border:none;
+border-radius:15px;
+}
+.maps-btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 25px;
+background:var(--azul);
+color:white;
+text-decoration:none;
+border-radius:12px;
+transition:.3s;
+}
+.maps-btn:hover{
+background:var(--azulClaro);
+}
+form{
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:var(--sombra);
+max-width:1000px;
+margin:auto;
+}
+form input,
+form textarea{
+width:100%;
+padding:15px;
+margin-bottom:20px;
+border:1px solid #ddd;
+border-radius:12px;
+font-family:'Poppins',sans-serif;
+font-size:15px;
+outline:none;
+transition:.3s;
+}
+form input:focus,
+form textarea:focus{
+border-color:var(--azulClaro);
+box-shadow:0 0 10px rgba(0,168,232,.3);
+}
+form button{
+background:var(--azul);
+color:white;
+border:none;
+padding:15px 30px;
+border-radius:12px;
+cursor:pointer;
+font-size:16px;
+transition:.3s;
+}
+form button:hover{
+background:var(--azulClaro);
+}
+footer{
+text-align:center;
+padding:30px;
+margin-top:40px;
+font-size:15px;
+color:#555;
+}
+::-webkit-scrollbar{
+width:10px;
+}
+::-webkit-scrollbar-track{
+background:#e8eef3;
+}
+::-webkit-scrollbar-thumb{
+background:var(--azulClaro);
+border-radius:20px;
+}
+@media(max-width:1200px){
+.sidebar{
+width:240px;
+}
+.main{
+margin-left:240px;
+}
+.two-column{
+grid-template-columns:1fr;
+}
+.map-layout{
+grid-template-columns:1fr;
+}
+}
+@media(max-width:768px){
+body{
+overflow:auto;
+}
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+.main{
+margin-left:0;
+height:auto;
+}
+.page{
+position:relative;
+display:block;
+height:auto;
+}
+.hero{
+height:500px;
+}
+.hero-content h2{
+font-size:42px;
+}
+.hero-content p{
+font-size:18px;
+}
+.section-title h2{
+font-size:34px;
+}
+.cards{
+grid-template-columns:1fr;
+}
+.gallery{
+grid-template-columns:1fr;
+}
+.stats{
+grid-template-columns:1fr;
+}
+.navigation{
+flex-direction:column;
+gap:15px;
+}
+.nav-btn{
+width:100%;
+}
+}
+</style>
+</head>
+<body>
+<div class="sidebar">
+<div class="logo">
+<h1>CUIDEMOS<br>EL AGUA</h1>
+<p>Proyecto Final HTML y CSS</p>
+</div>
+<ul class="menu">
+<li><a href="#" onclick="showPage('inicio')">Inicio</a></li>
+<li><a href="#" onclick="showPage('escuela')">Misión y Visión</a></li>
+<li><a href="#" onclick="showPage('importancia')">Importancia</a></li>
+<li><a href="#" onclick="showPage('ahorro')">Ahorro</a></li>
+<li><a href="#" onclick="showPage('contaminacion')">Contaminación</a></li>
+<li><a href="#" onclick="showPage('datos')">Estadísticas</a></li>
+<li><a href="#" onclick="showPage('proyectos')">Proyectos</a></li>
+<li><a href="#" onclick="showPage('galeria')">Galería</a></li>
+<li><a href="#" onclick="showPage('blog')">Noticias</a></li>
+<li><a href="#" onclick="showPage('actividades')">Actividades</a></li>
+<li><a href="#" onclick="showPage('video')">Video</a></li>
+<li><a href="#" onclick="showPage('odapas')">ODAPAS</a></li>
+<li><a href="#" onclick="showPage('contacto')">Contacto</a></li>
+</ul>
+</div>
+<div class="main">
+<section class="page active" id="inicio">
+<div class="hero">
+<div class="hero-overlay">
+<div class="hero-content">
+<h2>CUIDEMOS EL AGUA</h2>
+<p>El agua es el recurso más importante para la vida. Su conservación garantiza salud, desarrollo y bienestar para las generaciones presentes y futuras.</p>
+</div>
+</div>
+<img src="img/agua-principal.jpg" alt="Agua principal">
+</div>
+</section>
+<section class="page" id="escuela">
+<div class="section-title">
+<h2>Misión, Visión y Valores</h2>
+<p>La educación ambiental fortalece la conciencia social y promueve el cuidado responsable de los recursos naturales.</p>
+</div>
+<div class="cards">
+<div class="card">
+<h3>Misión</h3>
+<p>Formar estudiantes responsables, comprometidos con el desarrollo sostenible y capaces de aplicar acciones positivas para la conservación del agua y del medio ambiente.</p>
+</div>
+<div class="card">
+<h3>Visión</h3>
+<p>Ser una comunidad educativa reconocida por fomentar valores ecológicos, participación ciudadana y responsabilidad ambiental.</p>
+</div>
+<div class="card">
+<h3>Valores</h3>
+<p>Responsabilidad, respeto, honestidad, solidaridad, trabajo colaborativo y compromiso con el cuidado de los recursos naturales.</p>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('inicio')">Anterior</button>
+<button class="nav-btn" onclick="showPage('importancia')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="importancia">
+<div class="section-title">
+<h2>¿Por Qué Debemos Cuidar el Agua?</h2>
+<p>El agua es indispensable para la vida, la producción de alimentos, la salud pública y el equilibrio de los ecosistemas.</p>
+</div>
+<div class="two-column">
+<img src="img/importancia-agua.jpg" alt="Importancia del agua">
+<div class="text-box">
+<h3>Importancia del Agua</h3>
+<p>El agua participa en prácticamente todas las actividades humanas. Es necesaria para beber, producir alimentos, mantener la higiene y desarrollar actividades económicas.</p>
+<p>Además, regula los ecosistemas, favorece la biodiversidad y permite la supervivencia de millones de especies en el planeta.</p>
+<p>Aunque parece abundante, solo una pequeña parte del agua del mundo es apta para consumo humano, por lo que su conservación es fundamental.</p>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('escuela')">Anterior</button>
+<button class="nav-btn" onclick="showPage('ahorro')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="ahorro">
+<div class="section-title">
+<h2>Consejos para Ahorrar Agua</h2>
+<p>Las pequeñas acciones diarias pueden generar un impacto positivo en la conservación del agua.</p>
+</div>
+<div class="cards">
+<div class="card">
+<img src="img/ahorro-casa.jpg" alt="Ahorro en casa">
+<h3>En Casa</h3>
+<p>Cerrar correctamente las llaves, reparar fugas y reutilizar agua para limpieza o riego ayuda a disminuir el consumo diario.</p>
+</div>
+<div class="card">
+<img src="img/ahorro-escuela.jpg" alt="Ahorro en escuela">
+<h3>En la Escuela</h3>
+<p>Reportar fugas, utilizar únicamente el agua necesaria y participar en campañas de concientización fortalece la cultura ambiental.</p>
+</div>
+<div class="card">
+<img src="img/habitos-diarios.jpg" alt="Hábitos diarios">
+<h3>Hábitos Diarios</h3>
+<p>Tomar duchas cortas, cerrar la llave mientras se cepillan los dientes y evitar desperdicios son acciones simples y efectivas.</p>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('importancia')">Anterior</button>
+<button class="nav-btn" onclick="showPage('contaminacion')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="contaminacion">
+<div class="section-title">
+<h2>Contaminación del Agua</h2>
+<p>La contaminación del agua es uno de los problemas ambientales más importantes de la actualidad.</p>
+</div>
+<div class="cards">
+<div class="card">
+<img src="img/contaminacion-agua.jpg" alt="Contaminación">
+<h3>Causas Principales</h3>
+<p>Las descargas industriales, residuos sólidos, pesticidas, fertilizantes y aguas residuales son algunas de las principales fuentes de contaminación.</p>
+</div>
+<div class="card">
+<img src="img/impacto-ambiental.jpg" alt="Impacto ambiental">
+<h3>Consecuencias</h3>
+<p>La contaminación provoca enfermedades, pérdida de biodiversidad, afectaciones agrícolas y deterioro de ecosistemas acuáticos.</p>
+</div>
+<div class="card">
+<img src="img/prevencion-agua.jpg" alt="Prevención">
+<h3>Cómo Prevenirla</h3>
+<p>Evitar arrojar basura, reciclar residuos y utilizar productos biodegradables ayuda a proteger las fuentes de agua.</p>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('ahorro')">Anterior</button>
+<button class="nav-btn" onclick="showPage('datos')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="datos">
+<div class="section-title">
+<h2>Datos y Estadísticas</h2>
+<p>Los datos permiten comprender la importancia del agua y la necesidad de utilizarla de manera responsable.</p>
+</div>
+<div class="stats">
+<div class="stat">
+<h3 id="num1">0</h3>
+<p>Porcentaje de superficie terrestre cubierta por agua</p>
+</div>
+<div class="stat">
+<h3 id="num2">0</h3>
+<p>Porcentaje de agua salada en el planeta</p>
+</div>
+<div class="stat">
+<h3 id="num3">0</h3>
+<p>Porcentaje de agua dulce disponible</p>
+</div>
+<div class="stat">
+<h3 id="num4">0</h3>
+<p>Litros consumidos diariamente por persona en México</p>
+</div>
+</div>
+<div class="table-container">
+<table>
+<tr>
+<th>País</th>
+<th>Consumo Diario por Persona</th>
+</tr>
+<tr>
+<td>México</td>
+<td>366 litros</td>
+</tr>
+<tr>
+<td>Estados Unidos</td>
+<td>575 litros</td>
+</tr>
+<tr>
+<td>Japón</td>
+<td>250 litros</td>
+</tr>
+<tr>
+<td>India</td>
+<td>135 litros</td>
+</tr>
+<tr>
+<td>Alemania</td>
+<td>127 litros</td>
+</tr>
+</table>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('contaminacion')">Anterior</button>
+<button class="nav-btn" onclick="showPage('proyectos')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="proyectos">
+<div class="section-title">
+<h2>Proyectos Ecológicos Relacionados con el Agua</h2>
+<p>Diversos proyectos ayudan a conservar el recurso hídrico y mejorar las condiciones ambientales de las comunidades.</p>
+</div>
+<div class="cards">
+<div class="card">
+<img src="img/captacion-lluvia.jpg" alt="Captación de lluvia">
+<h3>Captación de Agua de Lluvia</h3>
+<p>Consiste en recolectar y almacenar el agua de lluvia para utilizarla posteriormente en actividades domésticas, escolares o agrícolas.</p>
+</div>
+<div class="card">
+<img src="img/reutilizacion-agua.jpg" alt="Reutilización del agua">
+<h3>Reutilización del Agua</h3>
+<p>El tratamiento adecuado permite aprovechar nuevamente el agua utilizada, reduciendo el desperdicio y el consumo de agua potable.</p>
+</div>
+<div class="card">
+<img src="img/limpieza-rios.jpg" alt="Limpieza de ríos">
+<h3>Limpieza de Ríos y Lagos</h3>
+<p>Las campañas comunitarias ayudan a retirar residuos sólidos y recuperar ecosistemas acuáticos afectados por la contaminación.</p>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('datos')">Anterior</button>
+<button class="nav-btn" onclick="showPage('galeria')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="galeria">
+<div class="section-title">
+<h2>Galería Ambiental</h2>
+<p>Imágenes relacionadas con la conservación, protección y aprovechamiento responsable del agua.</p>
+</div>
+<div class="gallery">
+<img src="img/galeria1.jpg" alt="Galería 1">
+<img src="img/galeria2.jpg" alt="Galería 2">
+<img src="img/galeria3.jpg" alt="Galería 3">
+<img src="img/galeria4.jpg" alt="Galería 4">
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('proyectos')">Anterior</button>
+<button class="nav-btn" onclick="showPage('blog')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="blog">
+<div class="section-title">
+<h2>Noticias y Medio Ambiente</h2>
+<p>Mantenerse informado permite comprender mejor los desafíos actuales relacionados con el agua y el medio ambiente.</p>
+</div>
+<div class="cards">
+<div class="card">
+<img src="img/noticia1.jpg" alt="Noticia 1">
+<h3>Sequías en Diversas Regiones</h3>
+<p>Las sequías continúan afectando a millones de personas en distintas partes del mundo, generando problemas de abastecimiento de agua.</p>
+</div>
+<div class="card">
+<img src="img/noticia2.jpg" alt="Noticia 2">
+<h3>Incremento de la Contaminación</h3>
+<p>Expertos advierten sobre el aumento de residuos que llegan a cuerpos de agua y afectan a numerosas especies.</p>
+</div>
+<div class="card">
+<img src="img/noticia3.jpg" alt="Noticia 3">
+<h3>Campañas de Concientización</h3>
+<p>Instituciones educativas y organizaciones ambientales promueven acciones para fomentar el uso responsable del agua.</p>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('galeria')">Anterior</button>
+<button class="nav-btn" onclick="showPage('actividades')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="actividades">
+<div class="section-title">
+<h2>Actividades y Juegos</h2>
+<p>Pon a prueba tus conocimientos sobre el cuidado del agua mediante este cuestionario interactivo.</p>
+</div>
+<div class="quiz">
+<h3>Cuestionario del Agua</h3>
+<br>
+<p>1. ¿Cuál es una forma correcta de ahorrar agua?</p>
+<button onclick="respuestaQuiz(true,1,this)">Reparar fugas</button>
+<button onclick="respuestaQuiz(false,1,this)">Dejar correr la llave</button>
+<hr style="margin:20px 0;">
+<p>2. ¿El agua es indispensable para la vida?</p>
+<button onclick="respuestaQuiz(true,2,this)">Sí</button>
+<button onclick="respuestaQuiz(false,2,this)">No</button>
+<hr style="margin:20px 0;">
+<p>3. ¿Debemos tirar basura en ríos y lagos?</p>
+<button onclick="respuestaQuiz(false,3,this)">Sí</button>
+<button onclick="respuestaQuiz(true,3,this)">No</button>
+<hr style="margin:20px 0;">
+<p>4. ¿Cerrar la llave mientras te cepillas los dientes ayuda a ahorrar agua?</p>
+<button onclick="respuestaQuiz(true,4,this)">Sí</button>
+<button onclick="respuestaQuiz(false,4,this)">No</button>
+<hr style="margin:20px 0;">
+<p>5. ¿La contaminación afecta a los ecosistemas?</p>
+<button onclick="respuestaQuiz(true,5,this)">Sí</button>
+<button onclick="respuestaQuiz(false,5,this)">No</button>
+<hr style="margin:20px 0;">
+<p>6. ¿La captación de lluvia es un proyecto ecológico?</p>
+<button onclick="respuestaQuiz(true,6,this)">Sí</button>
+<button onclick="respuestaQuiz(false,6,this)">No</button>
+<hr style="margin:20px 0;">
+<p>7. ¿Las fugas desperdician agua?</p>
+<button onclick="respuestaQuiz(true,7,this)">Sí</button>
+<button onclick="respuestaQuiz(false,7,this)">No</button>
+<hr style="margin:20px 0;">
+<p>8. ¿Debemos reutilizar agua cuando sea posible?</p>
+<button onclick="respuestaQuiz(true,8,this)">Sí</button>
+<button onclick="respuestaQuiz(false,8,this)">No</button>
+<hr style="margin:20px 0;">
+<p>9. ¿ODAPAS administra servicios relacionados con el agua?</p>
+<button onclick="respuestaQuiz(true,9,this)">Sí</button>
+<button onclick="respuestaQuiz(false,9,this)">No</button>
+<hr style="margin:20px 0;">
+<p>10. ¿Cuidar el agua ayuda a las futuras generaciones?</p>
+<button onclick="respuestaQuiz(true,10,this)">Sí</button>
+<button onclick="respuestaQuiz(false,10,this)">No</button>
+<br><br>
+<h3 id="resultadoQuiz">Puntuación:0 / 10</h3>
+<button class="nav-btn" style="margin-top:20px;" onclick="reiniciarQuiz()">Reiniciar Cuestionario</button>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('blog')">Anterior</button>
+<button class="nav-btn" onclick="showPage('video')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="video">
+<div class="section-title">
+<h2>Video Educativo</h2>
+<p>Conoce más sobre la importancia del agua mediante el siguiente material audiovisual.</p>
+</div>
+<div class="video-box">
+<div class="video-container">
+<iframe src="https://www.youtube.com/embed/nCcT_DZpn6w" title="Video sobre el cuidado del agua" allowfullscreen></iframe>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('actividades')">Anterior</button>
+<button class="nav-btn" onclick="showPage('odapas')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="odapas">
+<div class="section-title">
+<h2>ODAPAS Tecámac</h2>
+<p>Organismo responsable de administrar los servicios hidráulicos del municipio.</p>
+</div>
+<div class="map-layout">
+<div class="info-card">
+<h3>Información General</h3>
+<p><strong>Dirección:</strong><br>Calle Mariano Escobedo No. 301,<br>Héroes Tecámac, Ojo de Agua,<br>Tecámac, Estado de México.</p>
+<p><strong>Teléfono:</strong><br>55 8870 1590</p>
+<p><strong>Horario:</strong><br>Lunes a Viernes de 09:00 a 18:00 horas.</p>
+<p><strong>Funciones:</strong></p>
+<ul style="line-height:2">
+<li>Distribución de agua potable.</li>
+<li>Mantenimiento de redes hidráulicas.</li>
+<li>Atención de fugas.</li>
+<li>Tratamiento de aguas residuales.</li>
+<li>Programas de cultura del agua.</li>
+</ul>
+<a class="maps-btn" target="_blank" href="https://maps.google.com/?q=ODAPAS+Tecamac">Abrir en Google Maps</a>
+</div>
+<div class="map-frame">
+<iframe src="https://maps.google.com/maps?q=ODAPAS%20Tecamac&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+</div>
+</div>
+<div class="navigation">
+<button class="nav-btn" onclick="showPage('video')">Anterior</button>
+<button class="nav-btn" onclick="showPage('contacto')">Siguiente</button>
+</div>
+</section>
+<section class="page" id="contacto">
+<div class="section-title">
+<h2>Contacto</h2>
+<p>Puedes enviarnos tus comentarios y sugerencias.</p>
+</div>
+<form id="contactForm">
+<input type="text" placeholder="Nombre completo" required>
+<input type="email" placeholder="Correo electrónico" required>
+<input type="text" placeholder="Asunto" required>
+<textarea rows="7" placeholder="Escribe tu mensaje..." required></textarea>
+<button type="submit">Enviar Mensaje</button>
+</form>
+<footer>
+<p>Proyecto Final HTML y CSS | Cuidemos el Agua | 2026</p>
+</footer>
+</section>
+</div>
+<script>
+function showPage(id){
+document.querySelectorAll('.page').forEach(page=>{
+page.classList.remove('active');
+});
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
+}
+let puntos=0;
+let preguntasRespondidas=new Set();
+function respuestaQuiz(correcta,pregunta,boton){
+if(preguntasRespondidas.has(pregunta)){
+return;
+}
+preguntasRespondidas.add(pregunta);
+const grupo=document.querySelectorAll(`button[onclick*=",${pregunta},"]`);
+grupo.forEach(btn=>{
+btn.disabled=true;
+});
+if(correcta){
+puntos++;
+boton.style.background="#28a745";
+}else{
+boton.style.background="#dc3545";
+}
+document.getElementById("resultadoQuiz").innerHTML="Puntuación: "+puntos+" / 10";
+if(preguntasRespondidas.size===10){
+setTimeout(()=>{
+let mensaje="";
+if(puntos>=9){
+mensaje="Excelente resultado: "+puntos+"/10";
+}else if(puntos>=7){
+mensaje="Muy bien: "+puntos+"/10";
+}else if(puntos>=5){
+mensaje="Buen intento: "+puntos+"/10";
+}else{
+mensaje="Necesitas repasar más: "+puntos+"/10";
+}
+alert(mensaje);
+},300);
+}
+}
+function reiniciarQuiz(){
+puntos=0;
+preguntasRespondidas.clear();
+document.getElementById("resultadoQuiz").innerHTML="Puntuación: 0 / 10";
+document.querySelectorAll(".quiz button").forEach(btn=>{
+if(btn.innerText!=="Reiniciar Cuestionario"){
+btn.disabled=false;
+btn.style.background="";
+}
+});
+}
+document.getElementById("contactForm").addEventListener("submit",function(e){
+e.preventDefault();
+alert("Mensaje enviado correctamente.");
+this.reset();
+});
+function animarNumero(id,final){
+let n=0;
+let velocidad=Math.max(5,Math.floor(200/final));
+let intervalo=setInterval(()=>{
+n++;
+document.getElementById(id).innerHTML=n;
+if(n>=final){
+clearInterval(intervalo);
+}
+},velocidad);
+}
+window.onload=function(){
+animarNumero("num1",71);
+animarNumero("num2",97);
+animarNumero("num3",3);
+animarNumero("num4",366);
+};
+</script>
+</body>
+</html>
